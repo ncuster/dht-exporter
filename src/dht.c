@@ -17,7 +17,7 @@
 #include <wiringPi.h>
 #include "dht_sensor.h"
 
-#define TEMPERATURE_READS  5  // read the sensor this many times, then take the media temp
+#define TEMPERATURE_READS  3  // read the sensor this many times, then take the media temp
 #define READ_ERROR_SLEEP 500  // time to sleep if we get a read error on the sensor
 
 // output the sensor metric in prometheus format

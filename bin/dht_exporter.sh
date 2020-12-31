@@ -1,11 +1,12 @@
 NCAT=/usr/bin/ncat
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $(basename $0) sensor_name"
+if [ $# -ne 2 ]; then
+    echo "Usage: $(basename $0) sensor_name port"
     exit 1
 fi
 
 sensor_name="$1"
+port="$2"
 
 function get_metrics() {
     #IFS=, read temp humid <<< "$(sudo ./dht 2>/dev/null)"
@@ -15,5 +16,6 @@ function get_metrics() {
 }
 
 while true; do 
-    $NCAT -l -p 8005 -w 1 -c "sudo ./dht $sensor_name"
+    echo "netcat listening at $(date)"
+    $NCAT -l -p $port -w 1 -c "./dht_wrapper.sh $sensor_name"
 done
